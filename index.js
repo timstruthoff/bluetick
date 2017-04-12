@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
     res.end("Test");
 });
 
-app.use('/', router);
+app.use('/*', router);
 
 var server = app.listen(port, function() {
     console.log('Express server listening on port ' + server.address().port);
