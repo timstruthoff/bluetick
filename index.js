@@ -1,6 +1,7 @@
 /* jshint esversion: 6 */
 const express = require('express');
 const morgan = require('morgan');
+const path = require('path');
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -11,7 +12,7 @@ app.use(morgan('dev')); // Middleware for logging requests to the console
 
 var router = express.Router();
 router.get('/', function(req, res) {
-    res.end("Test");
+    res.sendFile(path.join(__dirname, "testimage.png"));
 });
 
 app.use('/*', router);
