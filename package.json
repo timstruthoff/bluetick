@@ -21,7 +21,11 @@
   },
   "homepage": "https://github.com/timstruthoff/andtracked#readme",
   "dependencies": {
+    "browscap-js": "^1.8.6020",
     "express": "^4.15.2",
-    "morgan": "^1.8.1"
+    "helmet": "^3.5.0",
+    "mongodb": "^2.2.25",
+    "morgan": "^1.8.1",
+    "validator": "^7.0.0"
   }
 }
