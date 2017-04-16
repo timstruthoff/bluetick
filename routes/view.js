@@ -1,4 +1,4 @@
-module.exports = (config, view, express, path, validator, sanitize, trackCollection) => {
+module.exports = (config, view, express, path, validator, sanitize, moment, trackCollection) => {
     var router = express.Router();
     router.get('/id-:trackId', function(req, res) {
 
@@ -26,48 +26,68 @@ module.exports = (config, view, express, path, validator, sanitize, trackCollect
             errors.push("Track ID missing!");
         }
 
-        // Checking if the track already exists
-        trackCollection.findOne({ trackId: trackId })
-            .then(function(document) {
-                console.log("track:", trackId);
-                if (document !== null) {
-                    console.log("track already exists");
-                    
-                }
-
-                // Inserting the data for the new user
-                trackCollection.insertOne({ trackId: trackId, events: [] })
-                    .then(function(result) {
-
-                    	// Loading the track document
-                        trackCollection.findOne({ trackId: trackId })
-                            .then(function(document) {
-                                console.log("track document:", document);
-                                
-                        		res.set('Content-Type', 'text/html; charset=utf-8');
-                        		res.end(view("view")(trackId, JSON.stringify(document)));
+        // Async checking if the track already exists or needs to be created and then create
+        var existsOrCreate = new Promise((resolve, reject) => {
+            trackCollection.findOne({ trackId: trackId })
+                .then(function(document) {
 
 
+                    if (document !== null) {
+                        console.log("Track already exists");
+                        resolve();
+                    } else {
+                        console.log("Track doesn't exist.");
+                        // Creating a new track
+                        trackCollection.insertOne({ trackId: trackId, events: [] })
+                            .then(function(result) {
+
+                                console.log("Track created.");
+                                resolve();
                             })
                             .catch(function(err) {
-                                console.log("error", err);
-                                res.end("error", err);
+                                console.log(err);
+                                res.json(["error!", err]);
                             });
+                    }
 
-                        
 
-                    })
-                    .catch(function(err) {
-                        console.log(err);
-                        res.json(["error!", err]);
+                })
+                .catch(function(err) {
+                    console.log("error", err);
+                    res.end("error", err);
+                });
+
+        });
+
+        existsOrCreate.then(() => {
+            trackCollection.findOne({ trackId: trackId })
+                .then(function(document) {
+
+                    res.set('Content-Type', 'text/html; charset=utf-8');
+
+                    var events = document.events.map((event) => {
+
+                    	var newEvent = {};
+                    	var dateObj = moment(event.date);
+
+
+                    	newEvent.date = dateObj.fromNow();
+
+
+                    	newEvent.useragent = event.useragent;
+
+                    	return newEvent;
                     });
+                    res.end(view("view")(trackId, events));
 
 
-            })
-            .catch(function(err) {
-                console.log("error", err);
-                res.end("error", err);
-            });
+                })
+                .catch(function(err) {
+                    console.log("error", err);
+                    res.end("error", err);
+                });
+
+        });
 
 
     });

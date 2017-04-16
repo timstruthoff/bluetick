@@ -8,8 +8,11 @@ const ObjectId = require('mongodb').ObjectID;
 
 const morgan = require('morgan');
 const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
 
 const Browscap = require('browscap-js');
+const moment = require('moment');
+const geoip = require('geoip-lite');
 
 const validator = require('validator');
 
@@ -19,9 +22,12 @@ var trackCollection, db;
 // Local reserved vars for helper modules
 var view, sanitize;
 
+const trackingPixel = fs.readFileSync(path.join(__dirname, "trackpixel-inactive.gif"));
+const trackingPixelRed = fs.readFileSync(path.join(__dirname, "trackpixel.gif"));
+
 // Global config
 var config = {
-	port: process.env.PORT || 4000,	// set our port
+	port: process.env.PORT || 80,	// set our port
 	rootDir: __dirname
 };
 
@@ -32,6 +38,7 @@ app.use(helmet());
 
 // configure app
 app.use(morgan('dev')); // Middleware for logging requests to the console
+app.use(cookieParser()); // Parse cookies to identify track request from browser
 
 
 // connect to our database
@@ -48,8 +55,8 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
 
         // Attach the routes													// Global modules passed down to modules
         app.use('/', require('./routes/index')(config, view, express, path));
-		app.use('/', require('./routes/view')(config, view, express, path, validator, sanitize, trackCollection));
-		app.use('/track/', require('./routes/track')(config, view, express, path, validator, sanitize, Browscap, trackCollection));
+		app.use('/', require('./routes/view')(config, view, express, path, validator, sanitize, moment, trackCollection));
+		app.use('/track/', require('./routes/track')(config, view, express, path, validator, sanitize, Browscap, geoip, trackingPixel, trackingPixelRed, trackCollection));
 
         //Start the server
         var server = app.listen(config.port, function() {
@@ -63,4 +70,4 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
 
 
 // All global modules in sort
-//config, path, fs, express, app, MongoClient, ObjectId, morgan, validator, sanitize, Browscap, trackCollection, db
+//config, path, fs, express, app, MongoClient, ObjectId, morgan, validator, sanitize, Browscap, geoip, moment, trackingPixel, trackCollection, db

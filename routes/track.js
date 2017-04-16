@@ -1,25 +1,68 @@
 /* jshint esversion: 6 */
-module.exports = (config, view, express, path, validator, sanitize, Browscap, trackCollection) => {
+module.exports = (config, view, express, path, validator, sanitize, Browscap, geoip, trackingPixel, trackingPixelRed, trackCollection) => {
     var router = express.Router();
 
-    
+
 
     router.get('/id-:trackId', function(req, res) {
-        var trackId = req.params.trackId;
+        var errors = [];
+
+        console.log("New track request!");
+
+        // Checking if all parameters are present.
+        if (typeof req.params.trackId !== "string" || validator.isEmpty(req.params.trackId)) {
+            errors.push("Track ID missing!");
+        }
+
+        if (typeof req.headers['user-agent'] !== "string" || validator.isEmpty(req.headers['user-agent'])) {
+            errors.push("Useragent missing!");
+        }
+
+
+        // Returning errors early if data is missing.
+        if (errors.length > 0) {
+            res.json({ errors: errors });
+            return;
+        }
+
+
+        // Sanitizing the inputs
+        var trackId = sanitize(req.params.trackId);
         var rawUseragent = req.headers['user-agent'];
 
-        var browscap = new Browscap();
-    	var useragent = browscap.getBrowser("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+        // Checking for emtpy values again after the sanitizing removed all invalid characters.
+        if (validator.isEmpty(trackId)) {
+            errors.push("Track ID missing!");
+        }
 
-        res.json(useragent);
-        // Checking if the track already exists
-        trackCollection.findOne({ trackId: trackId })
-            .then(function(document) {
-                console.log("track:", trackId);
-                console.log("track document:", document);
+        if (validator.isEmpty(rawUseragent)) {
+            errors.push("Useragent missing!");
+        }
 
-                //Async checking if track exists or needs to be created and then create
-                var existsOrCreate = new Promise((resolve, reject) => {
+
+        // Checking and sanitizing ignore cookie
+        var trackingPixelInactive = false;
+        if (typeof req.cookies.trackingPixelInactive === "string" && validator.isBoolean(req.cookies.trackingPixelInactive)) {
+            trackingPixelInactive = validator.toBoolean(req.cookies.trackingPixelInactive);
+            if (trackingPixelInactive) {
+                res.set('Content-Type', 'image/gif');
+                res.end(trackingPixel, "binary");
+                return;
+            }
+
+        }
+
+
+
+
+
+        console.log("track:", trackId);
+        // Async checking if the track already exists or needs to be created and then create
+        var existsOrCreate = new Promise((resolve, reject) => {
+            trackCollection.findOne({ trackId: trackId })
+                .then(function(document) {
+
+
                     if (document !== null) {
                         console.log("Track already exists");
                         resolve();
@@ -30,8 +73,6 @@ module.exports = (config, view, express, path, validator, sanitize, Browscap, tr
                             .then(function(result) {
 
                                 console.log("Track created.");
-                                //res.set('Content-Type', 'text/html; charset=utf-8');
-                                //res.end(view("view")(req.params.trackId));
                                 resolve();
                             })
                             .catch(function(err) {
@@ -39,40 +80,47 @@ module.exports = (config, view, express, path, validator, sanitize, Browscap, tr
                                 res.json(["error!", err]);
                             });
                     }
+
+
+                })
+                .catch(function(err) {
+                    console.log("error", err);
+                    res.end("error", err);
                 });
-                console.log(req.headers['user-agent']);
-                // After async check
-                existsOrCreate.then(() => {
-                    trackCollection.update({ trackId: trackId }, {
-                                $push: {
-                                    "events": {
-                                        date: Date.now(),
-                                        useragent: browscap.getBrowser(req.headers['user-agent'])
-                                    }
-                                }
+
+        });
+
+        existsOrCreate.then(() => {
+            var browscap = new Browscap();
+            var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            var geo = geoip.lookup(ip);
+            trackCollection.update({ trackId: trackId }, {
+                        $push: {
+                            "events": {
+                                date: Date.now(),
+                                useragent: browscap.getBrowser(rawUseragent),
+                                rawUseragent: rawUseragent,
+                                ip: ip,
+                                geo: geo
                             }
+                        }
+                    }
 
-                        )
-                        .then(function(result) {
+                )
+                .then(function(result) {
 
-                            console.log("Open added.");
-                            //res.set('Content-Type', 'text/html; charset=utf-8');
-                            //res.end(view("view")(req.params.trackId));
-                            res.end("success");
-                            
-                        })
-                        .catch(function(err) {
-                            console.log(err);
-                            res.json(["error!", err]);
-                        });
-                    
+                    console.log("Open added.");
+
+                    res.set('Content-Type', 'image/gif');
+                    res.end(trackingPixelRed, "binary");
+
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    res.json(["error!", err]);
                 });
 
-            })
-            .catch(function(err) {
-                console.log("error", err);
-                res.end("error", err);
-            });
+        });
     });
     return router;
 };

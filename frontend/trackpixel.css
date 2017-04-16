@@ -1,0 +1,100 @@
+
+
+.trackpixel {
+    margin-top: 50px;
+    margin-left: 50px;
+    background-color: #fff;
+    width: 20px;
+    height: 20px;
+    animation-name: jump;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 100%;
+    animation-timing-function: cubic-bezier(.43, .7, .61, .29);
+}
+
+
+/*@keyframes jump {
+        0% {
+            transform: translateY(0px) scaleY(0.8);
+        }
+        15% {
+            transform: translateY(-3px) scaleY(1);
+        }
+        50% {
+            transform: translateY(-10px) scaleY(1);
+        }
+        85% {
+            transform: translateY(-3px) scaleY(1);
+        }
+        100% {
+            transform: translateY(0px) scaleY(0.8);
+        }
+    }*/
+
+
+/*@keyframes jump {
+        0% {
+            transform: translateY(-10px) scaleY(1);
+        }
+        25% {
+            transform: translateY(-5px) scaleY(1);
+        }
+        50% {
+            transform: translateY(0px) scaleY(0.8);
+        }
+        75% {
+            transform: translateY(-5px) scaleY(1);
+        }
+        100% {
+            transform: translateY(-10px) scaleY(1);
+        }
+    }*/
+
+@keyframes jump {
+    /*Upper Line of square gets moved 20px up and down*/
+    0% {
+        transform: translateY(0px) scaleY(0.6);
+    }
+    20% {
+        transform: translateY(0px) scaleY(1)
+    }
+    /* 16px from translateY*/
+    50% {
+        transform: translateY(-12px) scaleY(1);
+    }
+    80% {
+        transform: translateY(0px) scaleY(1)
+    }
+    /* and 4px (1-0.8 scaleY * 20px height) from scaleY*/
+    100% {
+        transform: translateY(0px) scaleY(0.6);
+    }
+    /* The animatio is linear so you don't see the breake between translateY and scaleY*/
+}
+
+
+/*@keyframes jump {
+
+        0% {
+            transform: translateY(-12px) scaleY(1);
+        }
+
+        30% {
+        	transform: translateY(0px) scaleY(1)
+        }
+
+        50% {
+            transform: translateY(0px) scaleY(0.6);
+        }
+
+
+        70% {
+        	transform: translateY(0px) scaleY(1)
+        }
+
+        100% {
+            transform: translateY(-12px) scaleY(1);
+        }
+
+    }*/
