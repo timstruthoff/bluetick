@@ -1,8 +1,7 @@
 <head>
-
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 
 <body>
     <nav>
@@ -18,18 +17,30 @@
             <p class="instructions">Copy the red square into your email.</p>
             <div class="track-container">
                 <div class="track-input">
-                    <div class="track-pixel"></div>
-                    <!--<div class="track-id"></div>-->
-                    
+                    <div class="ghost">
+                        <div class="id">ID: 9s8d54</div>
+                    </div>
+                    <div class="input" contenteditable="true">
+                        <img src="img/tracking-pixel.gif" class="track-pixel"></img>
+                    </div>
+                </div>
+                <div class="track-input-ghost" contenteditable="true">
                 </div>
                 <button class="track-copy">Copy</button>
             </div>
             <p class="workswell">Works well with Gmail and Inbox.</p>
-            <a href="/other-client">Other client?</a>
-
+            <a class="hover-1" href="/other-client">Other client?</a>
         </section>
         <section class="opens">
-            <h1>Opens</h1>
+            <h1>Opens:</h1>
+            <div class="open">
+                <div class="number">#1</div>
+                <div class="text">
+                    <div class="time-ago">10 seconds ago</div>
+                    <div class="other">with Google Inbox from Germany</div>
+                    <a class="details-link" href="e45s">Details</a>
+                </div>
+            </div>
         </section>
     </main>
 </body>

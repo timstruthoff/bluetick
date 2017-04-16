@@ -23,6 +23,7 @@
   "dependencies": {
     "browscap-js": "^1.8.6020",
     "cookie-parser": "^1.4.3",
+    "country-list": "^1.1.0",
     "express": "^4.15.2",
     "geoip-lite": "^1.2.0",
     "helmet": "^3.5.0",

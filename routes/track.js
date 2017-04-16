@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-module.exports = (config, view, express, path, validator, sanitize, Browscap, geoip, trackingPixel, trackingPixelRed, trackCollection) => {
+module.exports = (config, view, express, path, validator, sanitize, browscap, geoip, trackingPixel, trackingPixelRed, trackCollection) => {
     var router = express.Router();
 
 
@@ -46,7 +46,7 @@ module.exports = (config, view, express, path, validator, sanitize, Browscap, ge
             trackingPixelInactive = validator.toBoolean(req.cookies.trackingPixelInactive);
             if (trackingPixelInactive) {
                 res.set('Content-Type', 'image/gif');
-                res.end(trackingPixel, "binary");
+                res.end(trackingPixelRed, "binary");
                 return;
             }
 
@@ -91,17 +91,19 @@ module.exports = (config, view, express, path, validator, sanitize, Browscap, ge
         });
 
         existsOrCreate.then(() => {
-            var browscap = new Browscap();
+            
             var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-            var geo = geoip.lookup(ip);
+
             trackCollection.update({ trackId: trackId }, {
                         $push: {
                             "events": {
                                 date: Date.now(),
                                 useragent: browscap.getBrowser(rawUseragent),
+                                //useragent: {},
                                 rawUseragent: rawUseragent,
                                 ip: ip,
-                                geo: geo
+                                geo: geoip.lookup(ip)
+                                //geo: {}
                             }
                         }
                     }

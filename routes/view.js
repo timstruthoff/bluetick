@@ -1,4 +1,4 @@
-module.exports = (config, view, express, path, validator, sanitize, moment, trackCollection) => {
+module.exports = (config, view, express, path, validator, sanitize, moment, countries, trackCollection) => {
     var router = express.Router();
     router.get('/id-:trackId', function(req, res) {
 
@@ -65,20 +65,64 @@ module.exports = (config, view, express, path, validator, sanitize, moment, trac
 
                     res.set('Content-Type', 'text/html; charset=utf-8');
 
-                    var events = document.events.map((event) => {
-
-                    	var newEvent = {};
-                    	var dateObj = moment(event.date);
+                    var events = document.events.map((event, index, array) => {
 
 
-                    	newEvent.date = dateObj.fromNow();
+                        var dateObj = moment(event.date);
 
 
-                    	newEvent.useragent = event.useragent;
+                        // <Building the text>
+                        var text = "Opened";
 
-                    	return newEvent;
+                        // If the browser was detected, append it
+                        if (event.useragent.Comment !== "Default Browser") {
+                            text += " with " + event.useragent.Comment;
+                        }
+
+                        // If the plattform was detected, append it
+                        if (event.useragent.Platform_Description !== "unknown") {
+                            text += " on " + event.useragent.Platform_Description;
+                        }
+
+
+                        // If the geo ip lookup was succesfull
+                        console.log("typeof", typeof event.geo);
+                        console.log(event.geo);
+                        if (event.geo !== null && typeof event.geo === "object" && typeof event.geo.country === "string" && !validator.isEmpty(event.geo.country)) {
+                            text += " from ";
+
+                            // If the city was detected, append it
+                            if (typeof event.geo.city === "string" && !validator.isEmpty(event.geo.city)) {
+
+                                text += event.geo.city + ", ";
+                            }
+
+                            // If there is a name for the country code append it
+                            if (typeof countries.getName(event.geo.country) === "string") {
+                                text += countries.getName(event.geo.country);
+
+                            // Else use the country code
+                            } else {
+                                text += event.geo.country;
+                            }
+
+                        }
+
+                        text += ".";
+                        // </Building the text>
+
+
+
+                        var newEvent = {
+                            number: index + 1,
+                            timeAgo: dateObj.fromNow(),
+                            text: text
+                        };
+
+                        return newEvent;
                     });
-                    res.end(view("view")(trackId, events));
+                    var trackUrl = `http://${config.hostname}/track/id-${trackId}`;
+                    res.end(view("view")(trackUrl, trackId, events));
 
 
                 })

@@ -11,8 +11,10 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 
 const Browscap = require('browscap-js');
+var browscap = new Browscap();
 const moment = require('moment');
 const geoip = require('geoip-lite');
+const countries = require('country-list')();
 
 const validator = require('validator');
 
@@ -28,7 +30,9 @@ const trackingPixelRed = fs.readFileSync(path.join(__dirname, "trackpixel.gif"))
 // Global config
 var config = {
 	port: process.env.PORT || 80,	// set our port
-	rootDir: __dirname
+	rootDir: __dirname,
+    //hostname: "fe373ad8.ngrok.io"
+    hostname: "localhost"
 };
 
 
@@ -52,11 +56,13 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
         sanitize = require('./sanitize')(validator);
         view = require("./view")(config, path);
 
+        //Serving static frontend assets
+        app.use('/assets', express.static('assets'));
 
         // Attach the routes													// Global modules passed down to modules
         app.use('/', require('./routes/index')(config, view, express, path));
-		app.use('/', require('./routes/view')(config, view, express, path, validator, sanitize, moment, trackCollection));
-		app.use('/track/', require('./routes/track')(config, view, express, path, validator, sanitize, Browscap, geoip, trackingPixel, trackingPixelRed, trackCollection));
+		app.use('/', require('./routes/view')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
+		app.use('/track/', require('./routes/track')(config, view, express, path, validator, sanitize, browscap, geoip, trackingPixel, trackingPixelRed, trackCollection));
 
         //Start the server
         var server = app.listen(config.port, function() {
@@ -70,4 +76,4 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
 
 
 // All global modules in sort
-//config, path, fs, express, app, MongoClient, ObjectId, morgan, validator, sanitize, Browscap, geoip, moment, trackingPixel, trackCollection, db
+//config, path, fs, express, app, MongoClient, ObjectId, morgan, validator, sanitize, browscap, geoip, countries, moment, trackingPixel, trackCollection, db
