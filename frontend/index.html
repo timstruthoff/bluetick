@@ -4,6 +4,7 @@
 </head>
 
 <body>
+
     <nav>
         <div class="logo"></div>
         <ul>
@@ -36,153 +37,10 @@
         </section>
         <section class="opens">
             <h1>Opens:</h1>
-            <div class="open">
-                <div class="number">#16</div>
-                <div class="text">
-                    <div class="time-ago">12 minutes ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Android OS.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#15</div>
-                <div class="text">
-                    <div class="time-ago">13 minutes ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Android OS.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#14</div>
-                <div class="text">
-                    <div class="time-ago">17 minutes ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Android OS.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#13</div>
-                <div class="text">
-                    <div class="time-ago">an hour ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#12</div>
-                <div class="text">
-                    <div class="time-ago">an hour ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#11</div>
-                <div class="text">
-                    <div class="time-ago">an hour ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#10</div>
-                <div class="text">
-                    <div class="time-ago">an hour ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Android OS.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#9</div>
-                <div class="text">
-                    <div class="time-ago">an hour ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Android OS.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#8</div>
-                <div class="text">
-                    <div class="time-ago">an hour ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#7</div>
-                <div class="text">
-                    <div class="time-ago">an hour ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#6</div>
-                <div class="text">
-                    <div class="time-ago">2 hours ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#5</div>
-                <div class="text">
-                    <div class="time-ago">2 hours ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#4</div>
-                <div class="text">
-                    <div class="time-ago">2 hours ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#3</div>
-                <div class="text">
-                    <div class="time-ago">2 hours ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#2</div>
-                <div class="text">
-                    <div class="time-ago">2 hours ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
-            </div>
-            <div class="open">
-                <div class="number">#1</div>
-                <div class="text">
-                    <div class="time-ago">2 hours ago</div>
-                    <div class="other">Opened with Chrome 57.0 on Windows 10.</div>
-                    <a class="details-link" href="undefined">Details</a>
-                </div>
+            <div id="opens">
+                
             </div>
         </section>
     </main>
-    <script type="text/javascript">
-    document.querySelector("#button").addEventListener("click", function() {
-
-        el = document.getElementById('input');
-
-        var range = document.createRange();
-        range.selectNodeContents(el);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-
-        try {
-            // copy text
-            document.execCommand('copy');
-        } catch (err) {
-            alert('Please press Ctrl/Cmd+C to copy');
-        }
-    });
-    </script>
+    <script src="script.js"></script>
 </body>

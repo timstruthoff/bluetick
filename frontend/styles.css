@@ -145,6 +145,67 @@ body {
     font-weight: 400;
 }
 
+.offline-notification {
+    display: flex;
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    width: 138px;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #000;
+    transform: translateX(-50%);
+    padding: 16px 24px;
+    animation: notifyFadeIn 0.4s ease-out;
+    animation-fill-mode: both;
+}
+
+@keyframes notifyFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translate3d(0, -100%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) none;
+    }
+}
+
+@keyframes notifyFadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) none;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translate3d(0, -100%, 0);
+    }
+}
+
+.offline-notification .text {
+    display: block;
+    margin-left: 24px;
+    line-height: 16px;
+}
+
+.offline-notification .point {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #f40022;
+    border-radius: 8px;
+    transition: background-color 0.4s;
+}
+
+.offline-notification.online {
+    animation: notifyFadeOut 0.4s ease-out;
+    animation-delay: 2s;
+}
+
+.offline-notification.online .point {
+    background-color: #66d878;
+}
+
 nav {
     margin-top: 48px;
     display: flex;
@@ -315,6 +376,34 @@ nav a {
     margin: 24px 0;
 }
 
+.opens .open.animate {
+    animation: openIn 1s;
+}
+
+@keyframes openIn {
+    from {
+        margin-top: -96px;
+        opacity: 0;
+    }
+    to {
+        margin-top: 24px;
+        opacity: 1;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    @keyframes openIn {
+        from {
+            margin-top: -72px;
+            opacity: 0;
+        }
+        to {
+            margin-top: 24px;
+            opacity: 1;
+        }
+    }
+}
+
 .opens .open .number {
     width: 60px;
     opacity: 0.3;
@@ -374,9 +463,7 @@ nav a {
         margin-top: 60px;
         display: flex;
         position: fixed;
-
     }
-
     nav .logo {
         display: block;
         margin-right: 62px;
@@ -408,7 +495,6 @@ nav a {
         margin-right: 30px;
         width: 450px;
     }
-
     .fix-container {
         position: fixed;
     }
@@ -430,14 +516,12 @@ nav a {
 }
 
 @media screen and (min-width: 1024px) {
-
     .header h1 {
         max-width: 450px;
     }
 }
 
 @media screen and (min-width: 1440px) {
-
     body {
         padding-left: 152px;
     }

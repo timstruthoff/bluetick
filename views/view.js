@@ -77,25 +77,8 @@ module.exports = (trackUrl, trackId, events) => {
         //document.cookie = "trackingPixelInactive=false; expires=Thu, 01 Jan 1970 00:00:00 UTC;"; // Delete the cookie
         document.cookie = "trackingPixelInactive=false";
     };
-
-    document.querySelector("#button").addEventListener("click", function() {
-
-        el = document.getElementById('input');
-
-        var range = document.createRange();
-        range.selectNodeContents(el);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-
-        try {
-            // copy text
-            document.execCommand('copy');
-        } catch (err) {
-            alert('Please press Ctrl/Cmd+C to copy');
-        }
-    });
     </script>
+    <script src="assets/script.js"></script>
 </body>`;
 
     return returnString;

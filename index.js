@@ -65,6 +65,10 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
 		app.use('/', require('./routes/view')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
 		app.use('/track/', require('./routes/track')(config, view, express, path, validator, sanitize, browscap, geoip, randomstring, trackingPixel, trackingPixelRed, trackCollection));
 
+        // API
+        app.use('/api/status', require('./routes/api_status')(config, view, express));
+        app.use('/api/', require('./routes/api_view')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
+
         //Start the server
         var server = app.listen(config.port, function() {
             console.log('Express server listening on port ' + server.address().port);
