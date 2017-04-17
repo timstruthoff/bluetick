@@ -128,7 +128,7 @@ module.exports = (config, view, express, path, validator, sanitize, moment, coun
                         events.push(newEvent);
                     }
                     var trackUrl = `http://${config.hostname}/track/id-${trackId}`;
-                    res.end(view("view")(trackUrl, trackId, events));
+                    res.end(view("view")(config, trackUrl, trackId, events));
 
 
                 })

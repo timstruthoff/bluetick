@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-module.exports = (trackUrl, trackId, events) => {
+module.exports = (config, trackUrl, trackId, events) => {
     returnString = "";
     returnString += `
 
@@ -41,7 +41,8 @@ module.exports = (trackUrl, trackId, events) => {
         </div>
         </section>
         <section class="opens">
-            <h1>Opens:</h1>`;
+            <h1>Opens:</h1>
+            <div id="opens">`;
 
     events.forEach((event) => {
         returnString += `
@@ -57,26 +58,15 @@ module.exports = (trackUrl, trackId, events) => {
     });
 
 
-    returnString += `
+    returnString += `</div>
         </section>
     </main>
     <script type="text/javascript">
-        var trackingImage = document.querySelector(".track-pixel");
-
-    document.cookie = "trackingPixelInactive=true";
-    trackingImage.src = "${trackUrl}";
-
-    trackingImage.onload = function() {
-        console.log("loaded")
-        //document.cookie = "trackingPixelInactive=false; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        document.cookie = "trackingPixelInactive=false";
-    };
-
-    trackingImage.onerror = function() {
-        console.log("error")
-        //document.cookie = "trackingPixelInactive=false; expires=Thu, 01 Jan 1970 00:00:00 UTC;"; // Delete the cookie
-        document.cookie = "trackingPixelInactive=false";
-    };
+    var passedVars = {
+        hostname: "${config.hostname}",
+        trackUrl: "${trackUrl}",
+        trackId: "${trackId}"
+   }
     </script>
     <script src="assets/script.js"></script>
 </body>`;

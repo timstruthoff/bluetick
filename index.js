@@ -63,6 +63,7 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
         // Attach the routes													// Global modules passed down to modules
         app.use('/', require('./routes/index')(config, view, express, path));
 		app.use('/', require('./routes/view')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
+        app.use('/', require('./routes/view_details')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
 		app.use('/track/', require('./routes/track')(config, view, express, path, validator, sanitize, browscap, geoip, randomstring, trackingPixel, trackingPixelRed, trackCollection));
 
         // API

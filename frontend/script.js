@@ -1,7 +1,7 @@
 var trackingImage = document.querySelector(".track-pixel");
 
 document.cookie = "trackingPixelInactive=true";
-trackingImage.src = "img/tracking-pixel.gif";
+trackingImage.src = passedVars.trackUrl;
 
 trackingImage.onload = function() {
     console.log("loaded");
@@ -78,7 +78,7 @@ function offline() {
 
                 }
             };
-            xhttp.open("GET", "http://192.168.2.104/api/status", true);
+            xhttp.open("GET", "http://" + passedVars.hostname + "/api/status", true);
             xhttp.send();
         }, 1000);
 
@@ -225,7 +225,7 @@ function loadJson() {
         xhttp.onerror = function(err) {
             reject(err);
         };
-        xhttp.open("GET", "http://192.168.2.104/api/id-test123?offset=" + events.length, true);
+        xhttp.open("GET", "http://" + passedVars.hostname + "/api/id-test123?offset=" + events.length, true);
         xhttp.send();
 
     });
