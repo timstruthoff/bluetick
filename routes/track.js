@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-module.exports = (config, view, express, path, validator, sanitize, browscap, geoip, trackingPixel, trackingPixelRed, trackCollection) => {
+module.exports = (config, view, express, path, validator, sanitize, browscap, geoip, randomstring, trackingPixel, trackingPixelRed, trackCollection) => {
     var router = express.Router();
 
 
@@ -45,6 +45,7 @@ module.exports = (config, view, express, path, validator, sanitize, browscap, ge
         if (typeof req.cookies.trackingPixelInactive === "string" && validator.isBoolean(req.cookies.trackingPixelInactive)) {
             trackingPixelInactive = validator.toBoolean(req.cookies.trackingPixelInactive);
             if (trackingPixelInactive) {
+                console.log("Open ignored!");
                 res.set('Content-Type', 'image/gif');
                 res.end(trackingPixelRed, "binary");
                 return;
@@ -93,11 +94,11 @@ module.exports = (config, view, express, path, validator, sanitize, browscap, ge
         existsOrCreate.then(() => {
             
             var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-
             trackCollection.update({ trackId: trackId }, {
                         $push: {
                             "events": {
                                 date: Date.now(),
+                                id: randomstring.generate(6),
                                 useragent: browscap.getBrowser(rawUseragent),
                                 //useragent: {},
                                 rawUseragent: rawUseragent,
@@ -111,10 +112,8 @@ module.exports = (config, view, express, path, validator, sanitize, browscap, ge
                 )
                 .then(function(result) {
 
-                    console.log("Open added.");
-
                     res.set('Content-Type', 'image/gif');
-                    res.end(trackingPixelRed, "binary");
+                    res.end(trackingPixel, "binary");
 
                 })
                 .catch(function(err) {

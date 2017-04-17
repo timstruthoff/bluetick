@@ -15,6 +15,7 @@ var browscap = new Browscap();
 const moment = require('moment');
 const geoip = require('geoip-lite');
 const countries = require('country-list')();
+const randomstring = require("randomstring");
 
 const validator = require('validator');
 
@@ -62,7 +63,7 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
         // Attach the routes													// Global modules passed down to modules
         app.use('/', require('./routes/index')(config, view, express, path));
 		app.use('/', require('./routes/view')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
-		app.use('/track/', require('./routes/track')(config, view, express, path, validator, sanitize, browscap, geoip, trackingPixel, trackingPixelRed, trackCollection));
+		app.use('/track/', require('./routes/track')(config, view, express, path, validator, sanitize, browscap, geoip, randomstring, trackingPixel, trackingPixelRed, trackCollection));
 
         //Start the server
         var server = app.listen(config.port, function() {
@@ -76,4 +77,4 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
 
 
 // All global modules in sort
-//config, path, fs, express, app, MongoClient, ObjectId, morgan, validator, sanitize, browscap, geoip, countries, moment, trackingPixel, trackCollection, db
+//config, path, fs, express, app, MongoClient, ObjectId, morgan, validator, sanitize, browscap, geoip, countries, moment, randomstring, trackingPixel, trackCollection, db

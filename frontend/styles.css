@@ -86,7 +86,7 @@ video {
     font: inherit;
     vertical-align: baseline;
     -webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 
@@ -176,6 +176,10 @@ nav a {
     line-height: 24px;
 }
 
+.logo-big {
+    display: none;
+}
+
 .header h1 {
     margin-top: 48px;
     font-size: 24px;
@@ -189,45 +193,47 @@ nav a {
 .track-container {
     margin-top: 24px;
     width: 100%;
+    max-width: 345px;
     height: 48px;
     display: flex;
 }
 
 .track-input {
-	position: relative;
+    position: relative;
     flex-grow: 1;
     border: 1px solid #fff;
-    
 }
 
 .track-input .input {
-	box-sizing: border-box;
-	width: 100%;
-	height: 100%;
-	font-size: 16px;
-    padding-top: 15px; /* 1px is already taken from the border of .track-input*/
-    padding-left: 19px; /* 1px is already taken from the border of .track-input*/
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    padding-top: 15px;
+    /* 1px is already taken from the border of .track-input*/
+    padding-left: 19px;
+    /* 1px is already taken from the border of .track-input*/
 }
 
 .track-input .input:focus {
-	outline: none;
+    outline: none;
 }
 
 .track-input .ghost {
-	box-sizing: border-box;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	pointer-events: none;
-	display: flex;
-	justify-content: flex-end;
-	padding: 15px;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
 }
 
 .track-input .ghost .id {
-	font-size: 11px;
-	line-height: 16px;
-	opacity: 0.3;
+    font-size: 11px;
+    line-height: 16px;
+    opacity: 0.3;
 }
 
 .track-input:focus {
@@ -235,8 +241,8 @@ nav a {
 }
 
 .track-pixel {
-	width: 16px;
-	height: 16px;
+    width: 16px;
+    height: 16px;
 }
 
 .track-copy {
@@ -250,12 +256,11 @@ nav a {
 .track-copy {
     background: #fff;
     color: #04010A;
-}
-
-.track-copy {
     background: none;
     color: #fff;
     transition: transform 0.2s ease;
+    font-size: 16px;
+    font-family: "Open Sans";
 }
 
 .track-copy:hover {
@@ -300,39 +305,38 @@ nav a {
     transform-origin: bottom right;
 }
 
-
-
 .opens h1 {
-	margin-top: 48px;
-	font-size: 24px;
+    margin-top: 48px;
+    font-size: 24px;
 }
 
 .opens .open {
-	display: flex;
-	margin: 24px 0;
+    display: flex;
+    margin: 24px 0;
 }
 
 .opens .open .number {
-	width: 60px;
-	opacity: 0.3;
+    width: 60px;
+    opacity: 0.3;
 }
 
 .opens .open .text {
-	flex-grow: 1;
+    flex-grow: 1;
 }
 
 .opens .open .other {
-	flex-grow: 1;
-	opacity: 1;
-	color: #9a999d; /*#fff @0.6 opacity; the text appears thinner*/
+    flex-grow: 1;
+    opacity: 1;
+    color: #9a999d;
+    /*#fff @0.6 opacity; the text appears thinner*/
 }
 
 .opens .open .details-link {
-	display: inline-block;
+    display: inline-block;
     position: relative;
     text-decoration: none;
-    color: #9a999d; /*#fff @0.6 opacity*/
-    
+    color: #9a999d;
+    /*#fff @0.6 opacity*/
     opacity: 1;
     transition: color 0.2s;
 }
@@ -357,3 +361,97 @@ nav a {
     background-color: #fff;
 }
 
+@media screen and (min-width: 768px) {
+    body {
+        font-size: 18px;
+        line-height: 30px;
+        padding: 0 60px;
+    }
+    main {
+        display: flex;
+    }
+    nav {
+        margin-top: 60px;
+        display: flex;
+        position: fixed;
+
+    }
+
+    nav .logo {
+        display: block;
+        margin-right: 62px;
+        width: 30px;
+        height: 30px;
+        display: none;
+    }
+    nav li {
+        width: auto;
+        margin-left: 30px;
+    }
+    nav li:first-child {
+        margin-left: 0;
+    }
+    .logo-big {
+        display: block;
+        margin-top: 60px;
+        width: 84px;
+        height: 90px;
+        background-image: url("img/logo.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+    main {
+        padding-top: 90px;
+    }
+    section.opens {}
+    section.header {
+        margin-right: 30px;
+        width: 450px;
+    }
+
+    .fix-container {
+        position: fixed;
+    }
+    .header h1 {
+        line-height: 60px;
+        font-size: 40px;
+        max-width: 345px;
+    }
+    .opens h1 {
+        margin-top: 210px;
+        font-size: 27px;
+    }
+    .track-copy {
+        font-size: 18px;
+    }
+    .track-input .ghost .id {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    .header h1 {
+        max-width: 450px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+
+    body {
+        padding-left: 152px;
+    }
+    section.header {
+        margin-right: 152px;
+        width: 450px;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    body {
+        padding-left: 338px;
+    }
+    section.header {
+        margin-right: 152px;
+    }
+}

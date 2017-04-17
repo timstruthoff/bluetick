@@ -65,8 +65,13 @@ module.exports = (config, view, express, path, validator, sanitize, moment, coun
 
                     res.set('Content-Type', 'text/html; charset=utf-8');
 
-                    var events = document.events.map((event, index, array) => {
+                    var events = [];
 
+                    // Looping through the array back to front
+                    var arrayLength = document.events.length;
+                    for (var i = arrayLength - 1; i >= 0; i--) {
+
+                        var event = document.events[i];
 
                         var dateObj = moment(event.date);
 
@@ -86,8 +91,6 @@ module.exports = (config, view, express, path, validator, sanitize, moment, coun
 
 
                         // If the geo ip lookup was succesfull
-                        console.log("typeof", typeof event.geo);
-                        console.log(event.geo);
                         if (event.geo !== null && typeof event.geo === "object" && typeof event.geo.country === "string" && !validator.isEmpty(event.geo.country)) {
                             text += " from ";
 
@@ -114,13 +117,16 @@ module.exports = (config, view, express, path, validator, sanitize, moment, coun
 
 
                         var newEvent = {
-                            number: index + 1,
+                            id: event.id,
+                            number: i + 1,
                             timeAgo: dateObj.fromNow(),
                             text: text
                         };
 
-                        return newEvent;
-                    });
+                        console.log(newEvent);
+
+                        events.push(newEvent);
+                    }
                     var trackUrl = `http://${config.hostname}/track/id-${trackId}`;
                     res.end(view("view")(trackUrl, trackId, events));
 

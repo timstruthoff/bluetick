@@ -30,6 +30,7 @@
     "moment": "^2.18.1",
     "mongodb": "^2.2.25",
     "morgan": "^1.8.1",
+    "randomstring": "^1.1.5",
     "validator": "^7.0.0"
   }
 }
