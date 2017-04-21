@@ -232,10 +232,6 @@ nav .logo {
     margin-right: 18px;
     width: 24px;
     height: 24px;
-    /*background-image: url("img/logo.svg");
-    background-image: url("http://localhost/design/logo/Frame.svg");
-    background-size: cover;
-    background-repeat: no-repeat;*/
 }
 
 nav .logo svg {
@@ -261,7 +257,6 @@ nav a {
     text-decoration: none;
     line-height: 24px;
 }
-
 
 .header h1 {
     margin-top: 38px;
@@ -499,7 +494,6 @@ nav a {
 }
 
 .opens h1 {
-    /* 48px + 2px to compensate the 2px negative margin from .instructions-long a */
     margin-top: 48px;
     font-size: 24px;
 }
@@ -712,5 +706,77 @@ nav a {
     }
     section.header {
         margin-right: 152px;
+    }
+}
+
+.details nav .logo {
+    display: block;
+}
+
+.details nav {
+    position: relative;
+}
+
+.details main {
+    padding-top: 51px;
+}
+
+.details .detail-row {
+    display: flex;
+}
+
+.details section {
+    margin-bottom: 24px;
+}
+
+.details section h2 {
+    opacity: 0.6;
+}
+
+.details .detail-left {
+    width: 100px;
+}
+
+.details .detail-right {
+    margin-left: 24px;
+}
+
+.details h1 {
+    font-size: 24px;
+    margin-bottom: 27px;
+}
+
+@media screen and (min-width: 768px) {
+    .details main {
+        display: block;
+        padding-top: 65px;
+    }
+    .details h1 {
+        font-size: 27px;
+        margin-bottom: 33px;
+    }
+    .details .details-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .details section {
+        margin-bottom: 60px;
+        margin-right: 24px;
+        width: 337px;
+    }
+    .details .detail-left {
+        width: 125px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .details section {
+        width: 460px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .details section {
+        width: 582px;
     }
 }

@@ -7,7 +7,7 @@
 }
 
 .details main {
-    padding-top: 48px;
+    padding-top: 51px;
 }
 
 .details .detail-row {
@@ -32,22 +32,24 @@
 
 .details h1 {
     font-size: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 27px;
 }
 
 @media screen and (min-width: 768px) {
-    main {
+    .details main {
         display: block;
+        padding-top: 65px;
     }
     .details h1 {
         font-size: 27px;
+        margin-bottom: 33px;
     }
     .details .details-container {
         display: flex;
         flex-wrap: wrap;
     }
     .details section {
-        margin-bottom: 72px;
+        margin-bottom: 60px;
         margin-right: 24px;
         width: 337px;
     }

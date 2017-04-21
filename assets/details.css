@@ -7,7 +7,7 @@
 }
 
 .details main {
-    padding-top: 48px;
+    padding-top: 54px;
 }
 
 .details .detail-row {
@@ -32,7 +32,7 @@
 
 .details h1 {
     font-size: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 27px;
 }
 
 @media screen and (min-width: 768px) {
