@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
@@ -16,11 +17,12 @@ const moment = require('moment');
 const geoip = require('geoip-lite');
 const countries = require('country-list')();
 const randomstring = require("randomstring");
+const mime = require('mime');
 
 const validator = require('validator');
 
 // Local reserved vars for db
-var trackCollection, db;
+var trackCollection, assetsCollection, db;
 
 // Local reserved vars for helper modules
 var view, sanitize;
@@ -33,12 +35,18 @@ var config = {
 	port: process.env.PORT || 80,	// set our port
 	rootDir: __dirname,
     //hostname: "fe373ad8.ngrok.io"
-    hostname: "localhost"
+    //hostname: "b5c24150.ngrok.io"
+    hostname: "localhost",
+    assetsDir: "assets"
 };
+var assets = 
 
 
 // Makes some security changes to the headers
 app.use(helmet());
+
+
+
 
 
 // configure app
@@ -51,6 +59,23 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
     .then(function(db) {
         console.log("connected to the mongoDB !");
         trackCollection = db.collection('tracks');
+        assetsCollection = db.collection('assets');
+
+        
+        //var getAsset = require("./getAsset")(config, path, fs, crypto, assetsCollection, mime).then((result) =>{
+//
+//            console.log("--- PROCESSASSETS END ---");
+//
+//        });
+        
+        console.log("--- PROCESSASSETS START ---");
+        var assets = require("./assets")(config, path, fs, crypto, assetsCollection, mime);
+        assets.loaded.then((result) =>{
+            console.log(assets.get("styles.css"));
+            console.log("--- PROCESSASSETS END ---");
+
+       });
+        
 
 
         //Helper modules
@@ -58,12 +83,13 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
         view = require("./view")(config, path);
 
         //Serving static frontend assets
-        app.use('/assets', express.static('assets'));
+        //app.use('/assets', express.static('assets'));
+        app.use('/assets/', require('./routes/assets')(config, view, express, path, fs, validator, sanitize, assetsCollection));
 
         // Attach the routes													// Global modules passed down to modules
-        app.use('/', require('./routes/index')(config, view, express, path));
-		app.use('/', require('./routes/view')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
-        app.use('/', require('./routes/view_details')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
+        app.use('/', require('./routes/index')(config, view, express, path, randomstring));
+		app.use('/', require('./routes/view')(config, view, express, path, assets, validator, sanitize, moment, countries, trackCollection));
+        app.use('/', require('./routes/view_details')(config, view, express, path, assets, validator, sanitize, moment, countries, trackCollection));
 		app.use('/track/', require('./routes/track')(config, view, express, path, validator, sanitize, browscap, geoip, randomstring, trackingPixel, trackingPixelRed, trackCollection));
 
         // API

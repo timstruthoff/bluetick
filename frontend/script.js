@@ -15,15 +15,32 @@ trackingImage.onerror = function() {
     document.cookie = "trackingPixelInactive=false";
 };
 
-document.querySelector("#button").addEventListener("click", function() {
 
-    el = document.getElementById('input');
+var redSquareMethodCopyButton = document.querySelector(".red-square-method .track-copy");
+var redSquareMethodTrackInput = document.querySelector(".red-square-method .track-input .input");
+redSquareMethodCopyButton.addEventListener("click", function() {
+
 
     var range = document.createRange();
-    range.selectNodeContents(el);
+    range.selectNodeContents(redSquareMethodTrackInput);
     var sel = window.getSelection();
     sel.removeAllRanges();
     sel.addRange(range);
+
+    try {
+        // copy text
+        document.execCommand('copy');
+    } catch (err) {
+        alert('Please press Ctrl/Cmd+C to copy');
+    }
+});
+
+var htmlMethodCopyButton = document.querySelector(".html-method .track-copy");
+var htmlMethodTrackInput = document.querySelector(".html-method .input");
+htmlMethodCopyButton.addEventListener("click", function() {
+
+
+    htmlMethodTrackInput.select();
 
     try {
         // copy text
@@ -86,6 +103,7 @@ function offline() {
 }
 
 var firstrender = true;
+
 function reloadEvents() {
     loadJson().then(function(result) {
 
@@ -178,7 +196,7 @@ function renderEvent(event) {
 
     var timeAgoEl = document.createElement("div");
     timeAgoEl.classList = "time-ago";
-    
+
     var timeAgoDate = new Date(event.timeAgo);
     var timeAgo = timeSince(timeAgoDate);
 
@@ -197,7 +215,7 @@ function renderEvent(event) {
 
     var detailsLinkEl = document.createElement("a");
     detailsLinkEl.classList = "details-link";
-    detailsLinkEl.href = event.id;
+    detailsLinkEl.href = event.number - 1;
     detailsLinkEl.innerHTML = "Details";
 
     textEl.appendChild(timeAgoEl);
@@ -235,3 +253,139 @@ function loadJson() {
 var openContainer = document.getElementById("opens");
 var events = [];
 reloadEvents();
+
+
+
+
+var helpOpen = false;
+var helpContainerEl = document.querySelector(".instructions-long");
+var helpAEl = document.querySelector(".instructions-long a");
+var helpPEl = document.querySelector(".instructions-long p");
+
+
+function openHelp() {
+    helpOpen = true;
+    helpContainerEl.classList = "instructions-long open";
+    helpPEl.style.height = "auto";
+    var height = helpPEl.clientHeight;
+    helpPEl.style.height = 0;
+
+    //console.log(redSquareMethodContainerEl.style.height);
+    //redSquareMethodContainerEl.style.paddingBottom = height;
+
+    // If the height is changed immidiately, there is no transition
+    setTimeout(function() {
+        helpPEl.style.height = height;
+
+    }, 1);
+}
+
+function closeHelp() {
+    helpOpen = false;
+    localStorage.helpOnceClosed = true;
+    helpContainerEl.classList = "instructions-long";
+    helpPEl.style.height = 0;
+}
+
+helpContainerEl.addEventListener("click", function(event) {
+    if (helpOpen) {
+        closeHelp();
+    } else {
+        openHelp();
+    }
+    event.preventDefault();
+});
+
+
+// Opening the help if the user doesn't blur the tab after 5 seconds
+var wasWindowBlurred = false;
+
+window.addEventListener("blur", function() {
+    wasWindowBlurred = true;
+});
+
+setTimeout(function() {
+    if (!wasWindowBlurred && !helpOpen && !localStorage.helpOnceClosed) {
+        openHelp();
+    }
+}, 5000);
+
+
+
+// <
+
+function hasClass(element, cls) {
+    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+}
+
+var otherClientLinkEl = document.querySelector(".other-client-link");
+var redSquareMethodContainerEl = document.querySelector(".red-square-method");
+var htmlMethodContainerEl = document.querySelector(".html-method");
+
+var currentMethodOpen = "red-square";
+if (hasClass(htmlMethodContainerEl, "active")) {
+    currentMethodOpen = "html";
+}
+
+otherClientLinkEl.addEventListener("click", function(event) {
+    if (currentMethodOpen === "red-square") {
+        currentMethodOpen = "html";
+        document.cookie = "method=1"; // Using numbers to transfer less data. 0 is "red-square"; 1 is "html".
+        
+        htmlMethodContainerEl.classList = "html-method active";
+
+
+        // Transitioning open
+        var height = htmlMethodContainerEl.clientHeight;
+        htmlMethodContainerEl.style.height = 0;
+
+        // If the height is changed immidiately, there is no transition
+        setTimeout(function() {
+            htmlMethodContainerEl.style.height = height;
+
+        }, 1);
+
+
+        // Transitioning red square method container to height = 0
+        redSquareMethodContainerEl.style.height = redSquareMethodContainerEl.clientHeight;
+        setTimeout(function() {
+            redSquareMethodContainerEl.style.height = "";
+            redSquareMethodContainerEl.classList = "red-square-method";
+
+        }, 1);
+
+        otherClientLinkEl.classList = "other-client-link open";
+    } else {
+        currentMethodOpen = "red-square";
+        document.cookie = "method=0"; // Using numbers to transfer less data. 0 is "red-square"; 1 is "html".
+        
+        redSquareMethodContainerEl.classList = "red-square-method active";
+
+
+        // Transitioning open
+        var height = redSquareMethodContainerEl.clientHeight;
+        redSquareMethodContainerEl.style.height = 0;
+
+        // If the height is changed immidiately, there is no transition
+        setTimeout(function() {
+            redSquareMethodContainerEl.style.height = height;
+
+        }, 1);
+
+
+        // Transitioning red square method container to height = 0
+        htmlMethodContainerEl.style.height = htmlMethodContainerEl.clientHeight;
+        setTimeout(function() {
+            htmlMethodContainerEl.style.height = "";
+            htmlMethodContainerEl.classList = "html-method";
+            setTimeout(function() {
+                redSquareMethodContainerEl.style.height = "";
+            }, 400);
+            
+        }, 1);
+
+        otherClientLinkEl.classList = "other-client-link";
+    }
+    event.preventDefault();
+
+});

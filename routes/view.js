@@ -1,4 +1,4 @@
-module.exports = (config, view, express, path, validator, sanitize, moment, countries, trackCollection) => {
+module.exports = (config, view, express, path, assets, validator, sanitize, moment, countries, trackCollection) => {
     var router = express.Router();
     router.get('/id-:trackId', function(req, res) {
 
@@ -24,6 +24,17 @@ module.exports = (config, view, express, path, validator, sanitize, moment, coun
         // Checking for emtpy values again after the sanitizing removed all invalid characters.
         if (validator.isEmpty(trackId)) {
             errors.push("Track ID missing!");
+        }
+
+        // Checking and sanitizing ignore cookie
+        var clientMethod = 0; // Using numbers to transfer less data. 0 is "red-square"; 1 is "html".
+        console.log("rawMethod:", req.cookies.method);
+        if (typeof req.cookies.method === "string" && validator.isNumeric(req.cookies.method)) {
+            parsedClientMethod = validator.toInt(req.cookies.method);
+            if (parsedClientMethod === 1) {
+                clientMethod = 1;
+            }
+
         }
 
         // Async checking if the track already exists or needs to be created and then create
@@ -128,7 +139,7 @@ module.exports = (config, view, express, path, validator, sanitize, moment, coun
                         events.push(newEvent);
                     }
                     var trackUrl = `http://${config.hostname}/track/id-${trackId}`;
-                    res.end(view("view")(config, trackUrl, trackId, events));
+                    res.end(view("view")(config, assets, trackUrl, trackId, events, clientMethod));
 
 
                 })

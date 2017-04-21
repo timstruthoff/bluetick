@@ -39,6 +39,12 @@ module.exports = (config, view, express, path, validator, sanitize, browscap, ge
             errors.push("Useragent missing!");
         }
 
+        // Returning errors.
+        if (errors.length > 0) {
+            res.json({ errors: errors });
+            return;
+        }
+
 
         // Checking and sanitizing ignore cookie
         var trackingPixelInactive = false;

@@ -1,4 +1,4 @@
-module.exports = (config, view, express, path, validator, sanitize, moment, countries, trackCollection) => {
+module.exports = (config, view, express, path, assets, validator, sanitize, moment, countries, trackCollection) => {
     var router = express.Router();
     router.get('/id-:trackId/:eventId', function(req, res) {
 
@@ -31,84 +31,48 @@ module.exports = (config, view, express, path, validator, sanitize, moment, coun
             errors.push("Track ID missing!");
         }
         if (validator.isEmpty(eventId)) {
-            errors.push("Track ID missing!");
+            errors.push("Event ID missing!");
         }
 
+        if (!isNaN(validator.toInt(eventId)) && typeof validator.toInt(eventId) === "number") {
+            eventId = validator.toInt(eventId);
+        } else {
+            errors.push("Event ID invalid!");
+        }
+
+        // Returning errors.
+        if (errors.length > 0) {
+            res.json({ errors: errors });
+            return;
+        }
+        console.log("trackId:", trackId)
 
         trackCollection.findOne({ trackId: trackId })
             .then(function(document) {
 
                 if (document === null) {
-                        console.log("Track already exists");
-                        resolve();
+                    console.log("Track doesn't exist!");
+                    res.json({ error: "Track doesn't exist!" });
+                    res.end();
+                    return;
                 }
+                
+                var event = document.events[eventId];
+
+                if (!(typeof event === "object" && typeof event.date === "number")) {
+                    res.json({ error: "Event doesn't exist!" });
+                    res.end();
+                    return;
+                }
+
+                
+
+                var dateObj = moment.utc(event.date);
+                var dateString = dateObj.format("L");
+                var timeString = dateObj.format("LTS") + " UTC";
+
                 res.set('Content-Type', 'text/html; charset=utf-8');
-
-                var events = [];
-
-                // Looping through the array back to front
-                var arrayLength = document.events.length;
-                for (var i = arrayLength - 1; i >= 0; i--) {
-
-                    var event = document.events[i];
-
-                    var dateObj = moment(event.date);
-
-
-                    // <Building the text>
-                    var text = "Opened";
-
-                    // If the browser was detected, append it
-                    if (event.useragent.Comment !== "Default Browser") {
-                        text += " with " + event.useragent.Comment;
-                    }
-
-                    // If the plattform was detected, append it
-                    if (event.useragent.Platform_Description !== "unknown") {
-                        text += " on " + event.useragent.Platform_Description;
-                    }
-
-
-                    // If the geo ip lookup was succesfull
-                    if (event.geo !== null && typeof event.geo === "object" && typeof event.geo.country === "string" && !validator.isEmpty(event.geo.country)) {
-                        text += " from ";
-
-                        // If the city was detected, append it
-                        if (typeof event.geo.city === "string" && !validator.isEmpty(event.geo.city)) {
-
-                            text += event.geo.city + ", ";
-                        }
-
-                        // If there is a name for the country code append it
-                        if (typeof countries.getName(event.geo.country) === "string") {
-                            text += countries.getName(event.geo.country);
-
-                            // Else use the country code
-                        } else {
-                            text += event.geo.country;
-                        }
-
-                    }
-
-                    text += ".";
-                    // </Building the text>
-
-
-
-                    var newEvent = {
-                        id: event.id,
-                        number: i + 1,
-                        timeAgo: dateObj.fromNow(),
-                        text: text
-                    };
-
-                    console.log(newEvent);
-
-                    events.push(newEvent);
-                }
-                var trackUrl = `http://${config.hostname}/track/id-${trackId}`;
-                res.end(view("view")(config, trackUrl, trackId, events));
-
+                res.end(view("view_details")(assets, eventId, dateString, timeString, event.useragent, event.ip, event.geo, countries)); //config, number, dateString, timeString, useragent, ip, geo
 
             })
             .catch(function(err) {

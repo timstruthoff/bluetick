@@ -145,6 +145,20 @@ body {
     font-weight: 400;
 }
 
+::-moz-selection { /* Code for Firefox */
+    color: #04010A;
+    color: #fff;
+    /*background-color: #f40022;*/
+    background-color: rgba(244, 0, 34, 0.99);
+}
+
+::selection {
+    color: #04010A;
+    color: #fff;
+    /*background: #f40022;*/
+    background-color: rgba(244, 0, 34, 0.99);
+}
+
 .offline-notification {
     display: flex;
     position: fixed;
@@ -245,11 +259,12 @@ nav a {
     margin-top: 48px;
     font-size: 24px;
     line-height: 48px;
+    margin-bottom: 48px;
 }
 
-.header p.instructions {
+/*.header p.instructions {
     margin-top: 48px;
-}
+}*/
 
 .track-container {
     margin-top: 24px;
@@ -366,8 +381,113 @@ nav a {
     transform-origin: bottom right;
 }
 
+.header .instructions-long {
+    max-width: 450px;
+    cursor: pointer;
+}
+
+.header .instructions-long h1 {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0;
+}
+
+.header .instructions-long p {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.2s ease-out;
+}
+
+.header .instructions-long a {
+    /* 2px margin so the underline isn't cut off by overflow: hidden; from .red-square-method */
+    margin-bottom: 2px;
+}
+
+.header .instructions-long p:after {
+    content: " below.";
+}
+
+
+
+.header .instructions-long.open a:after {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+}
+
+.header .red-square-method {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.4s;
+    /* -2px to compensate the 2px margin from .instructions-long a */
+    margin-bottom: -2px;
+}
+
+.header .red-square-method.active {
+    height: auto;
+}
+
+.header .html-method {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.4s;
+    /* -2px to compensate the 2px margin from .html-method a */
+    margin-bottom: -2px;
+}
+
+.header .html-method.active {
+    height: auto;
+}
+
+.header .html-method a {
+    margin-bottom: 2px;
+    margin-top: 24px;
+}
+
+.html-track-container {
+    margin-top: 24px;
+    width: 100%;
+    max-width: 345px;
+    height: 48px;
+    display: flex;
+}
+
+
+.html-track-container .input {
+    position: relative;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    font-size: 11px;
+    /* padding-top: 15px; */
+    padding: 0;
+    flex-grow: 1;
+    line-height: 16px;
+    overflow: hidden;
+    padding-left: 19px;
+    font-family: monospace;
+    background: none;
+    color: #fff;
+}
+
+.html-track-container .input:focus {
+    outline: none;
+}
+
+.html-track-container .track-copy {
+    min-width: 96px;
+}
+
+.other-client-link {
+    margin-top: 24px;
+}
+
+.other-client-link.open:after {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+}
+
 .opens h1 {
-    margin-top: 48px;
+    /* 48px + 2px to compensate the 2px negative margin from .instructions-long a */
+    margin-top: 50px;
     font-size: 24px;
 }
 
@@ -502,6 +622,14 @@ nav a {
         line-height: 60px;
         font-size: 40px;
         max-width: 345px;
+        margin-bottom: 60px;
+    }
+    .header .instructions-long h1 {
+        font-size: 18px;
+        line-height: 30px;
+    }
+    .header .instructions-long p:after {
+        content: " on the right.";
     }
     .opens h1 {
         margin-top: 210px;
