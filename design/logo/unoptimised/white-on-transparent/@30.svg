@@ -1,0 +1,21 @@
+<svg width="30" height="30" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<title>@30</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(161 -948)" figma:type="canvas">
+<mask id="mask0_alpha" mask-type="alpha">
+<path d="M -161 948L -131 948L -131 978L -161 978L -161 948Z" fill="#FFFFFF"/>
+</mask>
+<g id="@30" mask="url(#mask0_alpha)" figma:type="frame">
+<g id="Union" figma:type="vector">
+<use xlink:href="#path0_fill" transform="translate(-161 948)" fill="#FFFFFF"/>
+<use xlink:href="#path1_fill" transform="translate(-161 948)" fill="#FFFFFF"/>
+<use xlink:href="#path2_fill" transform="translate(-161 948)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 30 19L 26 23L 26 30L 30 30L 30 19Z"/>
+<path id="path1_fill" d="M 4 23L 0 19L 0 30L 4 30L 4 23Z"/>
+<path id="path2_fill" d="M 15 30L 0 15L 5 15L 15 25L 25 15L 15 5L 15 10L 12 10L 12 0L 22 0L 22 3L 18 3L 30 15L 15 30Z"/>
+</defs>
+</svg>

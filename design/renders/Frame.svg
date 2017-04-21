@@ -1,0 +1,21 @@
+<svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<title>Frame</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(58 -660)" figma:type="canvas">
+<mask id="mask0_alpha" mask-type="alpha">
+<path d="M -58 660L 6 660L 6 724L -58 724L -58 660Z" fill="#FFFFFF"/>
+</mask>
+<g id="Frame" mask="url(#mask0_alpha)" figma:type="frame">
+<g id="Union" figma:type="vector">
+<use xlink:href="#path0_fill" transform="translate(-58 660)" fill="#FFFFFF"/>
+<use xlink:href="#path1_fill" transform="translate(-58 660)" fill="#FFFFFF"/>
+<use xlink:href="#path2_fill" transform="translate(-58 660)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 0 32L 32 64L 64 32L 38.8571 6.85714L 48 6.85714L 48 0L 32 0L 25.1429 0L 25.1429 6.85714L 25.1429 22.8571L 32 22.8571L 32 11.4286L 40 19.4286L 52.5714 32L 32 52.5714L 19.4286 40L 11.4286 32L 0 32Z"/>
+<path id="path1_fill" d="M 64 41.1429L 54.8571 50.2857L 54.8571 64L 64 64L 64 41.1429Z"/>
+<path id="path2_fill" d="M 9.14286 50.2857L 0 41.1429L 0 64L 9.14286 64L 9.14286 50.2857Z"/>
+</defs>
+</svg>

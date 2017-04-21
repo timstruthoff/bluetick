@@ -145,7 +145,8 @@ body {
     font-weight: 400;
 }
 
-::-moz-selection { /* Code for Firefox */
+::-moz-selection {
+    /* Code for Firefox */
     color: #04010A;
     color: #fff;
     /*background-color: #f40022;*/
@@ -231,8 +232,18 @@ nav .logo {
     margin-right: 18px;
     width: 24px;
     height: 24px;
-    background-image: url("img/logo.svg");
-    background-repeat: no-repeat;
+    /*background-image: url("img/logo.svg");
+    background-image: url("http://localhost/design/logo/Frame.svg");
+    background-size: cover;
+    background-repeat: no-repeat;*/
+}
+
+nav .logo svg {
+    display: none;
+}
+
+nav .logo svg.at24px {
+    display: block;
 }
 
 nav ul {
@@ -259,15 +270,16 @@ nav a {
     margin-top: 38px;
     font-size: 24px;
     line-height: 48px;
-    margin-bottom: 48px;
+    margin-bottom: 39px;
 }
+
 
 /*.header p.instructions {
     margin-top: 48px;
 }*/
 
 .track-container {
-    margin-top: 24px;
+    margin-top: 19px;
     width: 100%;
     max-width: 345px;
     height: 48px;
@@ -353,7 +365,7 @@ nav a {
 }
 
 .header .workswell {
-    margin-top: 24px;
+    margin-top: 29px;
 }
 
 .header a {
@@ -394,6 +406,8 @@ nav a {
 
 .header .instructions-long p {
     height: 0;
+    margin-top: -2px;
+    margin-bottom: 2px;
     overflow: hidden;
     transition: height 0.2s ease-out;
 }
@@ -406,8 +420,6 @@ nav a {
 .header .instructions-long p:after {
     content: " below.";
 }
-
-
 
 .header .instructions-long.open a:after {
     transform: scaleX(0);
@@ -443,14 +455,18 @@ nav a {
     margin-top: 24px;
 }
 
+.header .html-method p {
+    margin-top: 2px;
+}
+
 .html-track-container {
-    margin-top: 24px;
+    margin-top: 19px;
     width: 100%;
     max-width: 345px;
     height: 48px;
     display: flex;
+    padding-bottom: 6px;
 }
-
 
 .html-track-container .input {
     position: relative;
@@ -487,8 +503,12 @@ nav a {
 
 .opens h1 {
     /* 48px + 2px to compensate the 2px negative margin from .instructions-long a */
-    margin-top: 50px;
+    margin-top: 48px;
     font-size: 24px;
+}
+
+.opens #opens {
+    padding-top: 2px;
 }
 
 .opens .open {
@@ -589,7 +609,15 @@ nav a {
         margin-right: 62px;
         width: 30px;
         height: 30px;
+    }
+    nav .logo svg {
         display: none;
+    }
+    nav .logo svg.at24px {
+        display: none;
+    }
+    nav .logo svg.at30px {
+        display: block;
     }
     nav li {
         width: auto;
@@ -632,18 +660,45 @@ nav a {
     .header .instructions-long p:after {
         content: " on the right.";
     }
-    .opens .open {
-        margin: 30px 0;
-    }
-    .opens h1 {
-        margin-top: 210px;
-        font-size: 27px;
+    .track-container {
+        margin-top: 23px;
+        height: 60px;
     }
     .track-copy {
         font-size: 18px;
     }
+    .track-input .input {
+        padding-top: 20px;
+        padding-left: 20px;
+    }
+    .track-input .ghost {
+        padding: 20px;
+    }
     .track-input .ghost .id {
         font-size: 12px;
+    }
+    .header .workswell {
+        margin-top: 8px;
+    }
+    .other-client-link {
+        margin-top: 30px;
+    }
+    .header .html-method p {
+        margin-top: 3px;
+    }
+    .html-track-container {
+        margin-top: 22px;
+        height: 60px;
+    }
+    .html-track-container .input {
+        font-size: 12px;
+    }
+    .opens .open {
+        margin: 30px 0;
+    }
+    .opens h1 {
+        margin-top: 215px;
+        font-size: 27px;
     }
 }
 
