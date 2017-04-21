@@ -262,9 +262,6 @@ nav a {
     line-height: 24px;
 }
 
-.logo-big {
-    display: none;
-}
 
 .header h1 {
     margin-top: 38px;
@@ -625,15 +622,6 @@ nav a {
     }
     nav li:first-child {
         margin-left: 0;
-    }
-    .logo-big {
-        display: block;
-        margin-top: 60px;
-        width: 84px;
-        height: 90px;
-        background-image: url("img/logo.svg");
-        background-size: contain;
-        background-repeat: no-repeat;
     }
     main {
         padding-top: 90px;
