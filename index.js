@@ -83,7 +83,7 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
         view = require("./view")(config, path);
 
         //Serving static frontend assets
-        //app.use('/assets', express.static('assets'));
+        app.use('/design', express.static('design'));
         app.use('/assets/', require('./routes/assets')(config, view, express, path, fs, validator, sanitize, assetsCollection));
 
         // Attach the routes													// Global modules passed down to modules
