@@ -32,16 +32,7 @@ const trackingPixel = fs.readFileSync(path.join(__dirname, "trackpixel-inactive.
 const trackingPixelRed = fs.readFileSync(path.join(__dirname, "trackpixel.gif"));
 
 // Global config
-var config = {
-    port: 80,
-    securePort: process.env.PORT || 443, // set our port
-    rootDir: __dirname,
-    //hostname: "fe373ad8.ngrok.io"
-    //hostname: "b5c24150.ngrok.io"
-    hostname: "localhost",
-    protocol: "https",
-    assetsDir: "assets"
-};
+var config = require("./config")(fs, __dirname);
 
 
 // Makes some security changes to the headers
@@ -94,10 +85,6 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
         app.use('/api/status', require('./routes/api_status')(config, view, express));
         app.use('/api/', require('./routes/api_view')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
 
-        const options = {
-            key: fs.readFileSync(__dirname + '/ssl/privatekey.key'),
-            cert: fs.readFileSync(__dirname + '/ssl/certificate.crt')
-        };
 
         // Setting up a http server to redirect to https
         express().get('*', function(req, res) {
@@ -106,7 +93,7 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
 
 
         spdy
-            .createServer(options, app)
+            .createServer(config.ssl, app)
             .listen(config.securePort, (error) => {
                 if (error) {
                     console.error(error);
