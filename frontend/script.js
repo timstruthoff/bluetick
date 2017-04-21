@@ -95,7 +95,7 @@ function offline() {
 
                 }
             };
-            xhttp.open("GET", "http://" + passedVars.hostname + "/api/status", true);
+            xhttp.open("GET", passedVars.protocol + "://" + passedVars.hostname + "/api/status", true);
             xhttp.send();
         }, 1000);
 
@@ -243,7 +243,7 @@ function loadJson() {
         xhttp.onerror = function(err) {
             reject(err);
         };
-        xhttp.open("GET", "http://" + passedVars.hostname + "/api/id-" + passedVars.trackId + "?offset=" + events.length, true);
+        xhttp.open("GET", passedVars.protocol + "://" + passedVars.hostname + "/api/id-" + passedVars.trackId + "?offset=" + events.length, true);
         xhttp.send();
 
     });

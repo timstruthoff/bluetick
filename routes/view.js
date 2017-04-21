@@ -138,7 +138,7 @@ module.exports = (config, view, express, path, assets, validator, sanitize, mome
 
                         events.push(newEvent);
                     }
-                    var trackUrl = `http://${config.hostname}/track/id-${trackId}`;
+                    var trackUrl = `${config.protocol}://${config.hostname}/track/id-${trackId}`;
                     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
                     res.end(view("view")(config, assets, trackUrl, trackId, events, clientMethod));
 

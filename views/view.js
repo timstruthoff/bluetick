@@ -79,6 +79,7 @@ module.exports = (config, assets, trackUrl, trackId, events, clientMethod) => {
     <script type="text/javascript">
     var passedVars = {
         hostname: "${config.hostname}",
+        protocol: "${config.protocol}",
         trackUrl: "${trackUrl}",
         trackId: "${trackId}"
    }
