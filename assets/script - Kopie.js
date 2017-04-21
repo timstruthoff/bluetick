@@ -215,7 +215,7 @@ function renderEvent(event) {
 
     var detailsLinkEl = document.createElement("a");
     detailsLinkEl.classList = "details-link";
-    detailsLinkEl.href = "/id-" + passedVars.trackId + "/" + (event.number-1);
+    detailsLinkEl.href = event.number - 1;
     detailsLinkEl.innerHTML = "Details";
 
     textEl.appendChild(timeAgoEl);

@@ -2,8 +2,7 @@
 module.exports = (assets, eventId, dateString, timeString, useragent, ip, geo, countries) => {
     returnString = "";
     returnString += `<head>
-    <link rel="stylesheet" type="text/css" href="/assets/styles.css">
-    <link rel="stylesheet" type="text/css" href="/assets/details.css">
+    <link rel="stylesheet" type="text/css" href="${assets.get('styles.css')}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 

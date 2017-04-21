@@ -215,7 +215,7 @@ function renderEvent(event) {
 
     var detailsLinkEl = document.createElement("a");
     detailsLinkEl.classList = "details-link";
-    detailsLinkEl.href = event.number - 1;
+    detailsLinkEl.href = "/id-" + passedVars.trackId + "/" + (event.number-1);
     detailsLinkEl.innerHTML = "Details";
 
     textEl.appendChild(timeAgoEl);
@@ -243,7 +243,7 @@ function loadJson() {
         xhttp.onerror = function(err) {
             reject(err);
         };
-        xhttp.open("GET", "http://" + passedVars.hostname + "/api/id-test123?offset=" + events.length, true);
+        xhttp.open("GET", "http://" + passedVars.hostname + "/api/id-" + passedVars.trackId + "?offset=" + events.length, true);
         xhttp.send();
 
     });
