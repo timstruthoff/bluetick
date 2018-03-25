@@ -1,0 +1,32 @@
+@media screen and (min-width: 768px) {
+    .track-container {
+        margin-top: 23px;
+        height: 60px;
+    }
+    .track-copy {
+        font-size: 18px;
+    }
+    .track-input .input {
+        padding-top: 20px;
+        padding-left: 20px;
+    }
+    .track-input .ghost {
+        padding: 20px;
+    }
+    .track-input .ghost .id {
+        font-size: 12px;
+    }
+    .header .html-method p {
+        margin-top: 3px;
+    }
+    .html-track-container {
+        margin-top: 22px;
+        height: 60px;
+    }
+    .html-track-container .input {
+        font-size: 12px;
+    }
+    .other-client-link {
+        margin-top: 30px;
+    }
+}

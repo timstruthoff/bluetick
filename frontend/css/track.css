@@ -1,0 +1,127 @@
+.track-container {
+    margin-top: 19px;
+    width: 100%;
+    max-width: 345px;
+    height: 48px;
+    display: flex;
+}
+
+.track-input {
+    position: relative;
+    flex-grow: 1;
+    border: 1px solid #fff;
+}
+
+.track-input .input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    padding-top: 15px;
+    /* 1px is already taken from the border of .track-input*/
+    padding-left: 19px;
+    /* 1px is already taken from the border of .track-input*/
+}
+
+.track-input .input:focus {
+    outline: none;
+}
+
+.track-input .ghost {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+.track-input .ghost .id {
+    font-size: 11px;
+    line-height: 16px;
+    opacity: 0.3;
+}
+
+.track-input:focus {
+    outline: none;
+}
+
+.track-pixel {
+    width: 16px;
+    height: 16px;
+}
+
+.track-copy {
+    width: 100px;
+    border: 1px solid #fff;
+    border-left: none;
+    background: none;
+    color: #fff;
+}
+
+.track-copy {
+    background: #fff;
+    color: #04010A;
+    background: none;
+    color: #fff;
+    transition: transform 0.2s ease;
+    font-size: 16px;
+    font-family: "Open Sans";
+}
+
+.track-copy:hover {
+    background: #fff;
+    color: #04010A;
+}
+
+.track-copy:focus {
+    outline: none;
+}
+
+.track-copy:active {
+    transform: scale(0.95);
+}
+
+.html-track-container {
+    margin-top: 19px;
+    width: 100%;
+    max-width: 345px;
+    height: 48px;
+    display: flex;
+    padding-bottom: 6px;
+}
+
+.html-track-container .input {
+    position: relative;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    font-size: 11px;
+    /* padding-top: 15px; */
+    padding: 0;
+    flex-grow: 1;
+    line-height: 16px;
+    overflow: hidden;
+    padding-left: 19px;
+    font-family: monospace;
+    background: none;
+    color: #fff;
+}
+
+.html-track-container .input:focus {
+    outline: none;
+}
+
+.html-track-container .track-copy {
+    min-width: 96px;
+}
+
+.other-client-link {
+    margin-top: 24px;
+}
+
+.other-client-link.open:after {
+    transform: scaleX(0);
+    transform-origin: bottom right;
+}

@@ -1,0 +1,37 @@
+nav {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: row;
+}
+
+nav .logo {
+    display: block;
+    margin-right: 18px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+nav .logo svg {
+    display: none;
+}
+
+nav .logo svg.at24px {
+    display: block;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+}
+
+nav li {
+    width: 100px;
+    margin-left: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    line-height: 24px;
+}

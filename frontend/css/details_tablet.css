@@ -1,0 +1,22 @@
+@media screen and (min-width: 768px) {
+    .details main {
+        display: block;
+        padding-top: 65px;
+    }
+    .details h1 {
+        font-size: 27px;
+        margin-bottom: 33px;
+    }
+    .details .details-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .details section {
+        margin-bottom: 60px;
+        margin-right: 24px;
+        width: 337px;
+    }
+    .details .detail-left {
+        width: 125px;
+    }
+}

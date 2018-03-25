@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    background-color: #04010A;
+    color: #fff;
+    font-family: "Open Sans";
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: #04010A;
+    color: #fff;
+    /*background-color: #f40022;*/
+    background-color: rgba(244, 0, 34, 0.99);
+}
+
+::selection {
+    color: #04010A;
+    color: #fff;
+    /*background: #f40022;*/
+    background-color: rgba(244, 0, 34, 0.99);
+}
+
+footer {
+    background-color: red;
+}
+
+main {
+    flex-grow: 1;
+}

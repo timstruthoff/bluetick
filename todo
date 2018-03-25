@@ -1,0 +1,11 @@
+- [ ] Bugs
+   - [x] Details logo missing
+   - [ ] ip adress in details not right
+   - [ ] client in details not right
+- [x] document title
+- [ ] favicons
+- [ ] manifest.json
+- [x] embed google fonts
+- [x] gzip
+- [ ] upgrade site
+- [ ] minify html in view module

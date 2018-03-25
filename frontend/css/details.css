@@ -1,0 +1,32 @@
+.details nav {
+    position: relative;
+}
+
+.details main {
+    padding-top: 51px;
+}
+
+.details .detail-row {
+    display: flex;
+}
+
+.details section {
+    margin-bottom: 24px;
+}
+
+.details section h2 {
+    opacity: 0.6;
+}
+
+.details .detail-left {
+    width: 100px;
+}
+
+.details .detail-right {
+    margin-left: 24px;
+}
+
+.details h1 {
+    font-size: 24px;
+    margin-bottom: 27px;
+}

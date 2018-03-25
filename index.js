@@ -8,6 +8,7 @@ const crypto = require('crypto');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 
+const compression = require('compression');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
@@ -34,6 +35,9 @@ const trackingPixelRed = fs.readFileSync(path.join(__dirname, "trackpixel.gif"))
 // Global config
 var config = require("./config")(fs, __dirname);
 
+
+// GZIP everything
+app.use(compression());
 
 // Makes some security changes to the headers
 app.use(helmet());
@@ -85,6 +89,12 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
         app.use('/api/status', require('./routes/api_status')(config, view, express));
         app.use('/api/', require('./routes/api_view')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
 
+
+        // Set the max number of sockets
+        var https = require('https');
+        https.globalAgent.maxSockets = 50;
+        var http = require('http');
+        https.globalAgent.maxSockets = 50;
 
         // Setting up a http server to redirect to https
         express().get('*', function(req, res) {

@@ -99,7 +99,8 @@ module.exports = (config, view, express, path, validator, sanitize, browscap, ge
 
         existsOrCreate.then(() => {
             
-            var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            //var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            var ip = req.connection.remoteAddress;
             trackCollection.update({ trackId: trackId }, {
                         $push: {
                             "events": {

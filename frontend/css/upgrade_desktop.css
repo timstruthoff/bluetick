@@ -1,0 +1,8 @@
+@media screen and (min-width: 1440px) {
+
+    .upgrade .price-option {
+        margin-right: 30px;
+        width: 337px;
+        flex-grow: 0;
+    }
+}

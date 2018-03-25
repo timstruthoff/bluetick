@@ -1,0 +1,76 @@
+.upgrade nav {
+    position: relative;
+}
+
+.upgrade main {
+    padding-top: 74px;
+    display: block;
+}
+
+.upgrade h1 {
+    font-size: 24px;
+    margin-bottom: 46px;
+}
+
+.upgrade .price-option h1 {
+    font-size: 24px;
+    margin-bottom: 28px;
+    margin-top: 1px;
+}
+
+.upgrade .price-option {
+	border: 1px solid #4808B6;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 48px;
+	padding-bottom: 48px;
+	margin-bottom: 48px;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+.upgrade .price-option:active {
+        transform: scale(0.95);
+    }
+.upgrade .price-option h1 {
+	font-size: 24px;
+}
+
+.upgrade .price-option li {
+	margin-bottom: 24px;
+}
+
+.upgrade .price-option .row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 43px;
+	margin-bottom: -3px;
+}
+
+.upgrade .price-option .price {
+	color: #F40022;
+	font-size: 24px;
+	margin-top: 3px;
+	margin-bottom: -4px;
+}
+
+.upgrade .price-option .price .per-month {
+	font-size: 16px;
+	margin-left: 0.5ch;
+}
+
+.upgrade .price-option .price.free .per-month {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.upgrade .price-option .buy {
+	font-size: 11px;
+	width: 60px;
+	height: 24px;
+	border-radius: 12px;
+	background-color: #4808B6;
+	color: #04010A;
+	text-decoration: none;
+	text-align: center;
+}

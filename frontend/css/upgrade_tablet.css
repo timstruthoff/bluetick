@@ -1,0 +1,63 @@
+@media screen and (min-width: 768px) {
+    .upgrade main {
+        padding-top: 95px;
+    }
+    .upgrade h1 {
+        font-size: 27px;
+        margin-bottom: 55px;
+    }
+    .upgrade .pricing-table {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .upgrade .price-option {
+        display: flex;
+        flex-direction: column;
+        margin-right: 0px;
+        width: auto;
+        flex-grow: 1;
+        height: 570px;
+        box-sizing: border-box;
+        margin-bottom: 30px;
+        padding-bottom: 60px;
+        padding-top: 33px;
+    }
+    .upgrade .price-option:hover {
+        transform: scale(1.05);
+    }
+    .upgrade .price-option:active {
+        transform: scale(1.025);
+    }
+    .upgrade .price-option:first-child {
+        margin-right: 30px;
+    }
+    .upgrade .price-option h1 {
+        margin-bottom: 33px;
+        font-size: 27px;
+    }
+    .upgrade .price-option li {
+        margin-bottom: 30px;
+    }
+    .upgrade .price-option .row {
+        margin-top: auto;
+    }
+    .upgrade .price-option .price {
+        font-size: 27px;
+        margin-top: 5px;
+        margin-bottom: -6px;
+    }
+    .upgrade .price-option .price.free {
+        font-size: 27px;
+        margin-top: 2px;
+        margin-bottom: -3px;
+    }
+    .upgrade .price-option .price .per-month {
+        font-size: 18px;
+    }
+    .upgrade .price-option .buy {
+        font-size: 12px;
+        width: 75px;
+        height: 30px;
+        border-radius: 15px;
+    }
+}

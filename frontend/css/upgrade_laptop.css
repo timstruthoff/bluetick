@@ -1,0 +1,15 @@
+@media screen and (min-width: 1024px) {
+    .upgrade .pricing-table {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .upgrade .price-option {
+        margin-right: 30px;
+        width: 215px;
+        flex-grow: 1;
+    }
+    .upgrade .price-option:last-child {
+        margin-right: 0px;
+    }
+}

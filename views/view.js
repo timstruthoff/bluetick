@@ -3,7 +3,7 @@ module.exports = (config, assets, trackUrl, trackId, events, clientMethod) => {
     console.log("method:", clientMethod);
     returnString = "";
     returnString += `<head>
-    <link rel="stylesheet" type="text/css" href="${assets.get('styles.css')}">
+    <link rel="stylesheet" type="text/css" href="${assets.get('styles.min.css')}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -84,7 +84,7 @@ module.exports = (config, assets, trackUrl, trackId, events, clientMethod) => {
         trackId: "${trackId}"
    }
     </script>
-    <script src="${assets.get('script.js')}"></script>
+    <script src="${assets.get('script.min.js')}"></script>
 </body>`;
     return returnString;
 

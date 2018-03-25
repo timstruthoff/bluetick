@@ -1,9 +1,0 @@
-- Bugs
-   - Details logo missing
-   - ip adress in details not right
-   - client in details not right
-- document title
-- favicons
-- add to homescreen
-- manifest.json
-- remove tap highlight

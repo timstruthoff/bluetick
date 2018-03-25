@@ -1,0 +1,8 @@
+@media screen and (min-width: 1920px) {
+    body {
+        padding-left: 338px;
+    }
+    footer {
+    	top: 810px;
+    }
+}

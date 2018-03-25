@@ -1,0 +1,26 @@
+@media screen and (min-width: 768px) {
+    section.header {
+        margin-right: 30px;
+        width: 450px;
+    }
+    .fix-container {
+        position: fixed;
+    }
+    .header h1 {
+        line-height: 60px;
+        font-size: 40px;
+        max-width: 345px;
+        margin-bottom: 53px;
+        margin-top: 194px;
+    }
+    .header .instructions-long h1 {
+        font-size: 18px;
+        line-height: 30px;
+    }
+    .header .instructions-long p:after {
+        content: " on the right.";
+    }
+    .header .workswell {
+        margin-top: 8px;
+    }
+}
