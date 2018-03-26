@@ -49,7 +49,7 @@ module.exports = (config, assets, trackUrl, trackId, events, clientMethod) => {
                 <div class="html-method${clientMethod === 1 ? " active" : ""}">
                     <p>Copy the following code into your email signature.</p>
                     <div class="html-track-container">
-                        <input class="input" id="input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="<img src='http://localhost/track/id-${trackId}'>">
+                        <input class="input" id="input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="<img src='http://bluetick.tst.works/track/id-${trackId}'>">
                         <button class="track-copy">Copy</button>
                     </div>
                 </div>
