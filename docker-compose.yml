@@ -1,0 +1,20 @@
+version: '2.1'
+
+services:
+  bluetick:
+    image: bluetick
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 80:80
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"

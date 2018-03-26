@@ -4,6 +4,8 @@ module.exports = (fs, root) => {
         rootDir: root,
         hostname: "localhost",
         protocol: "http",
-        assetsDir: "assets"
+        assetsDir: "assets",
+        dbAdress: "db:27017",
+        dbName: "test"
     };
 };
