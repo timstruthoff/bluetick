@@ -1,4 +1,3 @@
-const spdy = require('spdy')
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -49,7 +48,7 @@ app.use(cookieParser()); // Parse cookies to identify track request from browser
 
 // connect to our database
 MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
-    .then(function(db) {
+    .then(function (db) {
         console.log("connected to the mongoDB !");
         trackCollection = db.collection('tracks');
         assetsCollection = db.collection('assets');
@@ -90,31 +89,11 @@ MongoClient.connect("mongodb://127.0.0.1:27017/andtracked")
         app.use('/api/', require('./routes/api_view')(config, view, express, path, validator, sanitize, moment, countries, trackCollection));
 
 
-        // Set the max number of sockets
-        var https = require('https');
-        https.globalAgent.maxSockets = 50;
-        var http = require('http');
-        https.globalAgent.maxSockets = 50;
-
-        // Setting up a http server to redirect to https
-        express().get('*', function(req, res) {
-            res.redirect('https://' + config.hostname + req.url);
-        }).listen(config.port);
-
-
-        spdy
-            .createServer(config.ssl, app)
-            .listen(config.securePort, (error) => {
-                if (error) {
-                    console.error(error);
-                    return process.exit(1);
-                } else {
-                    console.log('Listening on port: ' + config.securePort + '.');
-                }
-            });
-
+        const server = app.listen(config.port, function () {
+            console.log('Express server listening on port ' + server.address().port);
+        });
     })
-    .catch(function(err) {
+    .catch(function (err) {
         console.log(err);
     });
 
