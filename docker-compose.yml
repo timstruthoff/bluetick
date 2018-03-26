@@ -9,10 +9,10 @@ services:
     ports:
       - 80:80
     links:
-      - db
+      - bluetick-db
     depends_on:
-      - db
-  db:
+      - bluetick-db
+  bluetick-db:
     image: mongo
     volumes:
       - ./data:/data/db

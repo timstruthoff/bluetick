@@ -5,7 +5,7 @@ module.exports = (fs, root) => {
         hostname: "localhost",
         protocol: "http",
         assetsDir: "assets",
-        dbAdress: "db:27017",
-        dbName: "test"
+        dbAdress: "bluetick-db:27017",
+        dbName: "bluetick"
     };
 };
